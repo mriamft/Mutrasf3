@@ -19,16 +19,16 @@ public class TruckProfileActivity extends AppCompatActivity {
 
         dbHelper = new DBHelper(this);
 
-
         String truckId = getIntent().getStringExtra("TRUCK_ID");
         String truckName = getIntent().getStringExtra("TRUCK_NAME");
         String truckPrice = getIntent().getStringExtra("TRUCK_PRICE");
         String truckPhone = getIntent().getStringExtra("TRUCK_PHONE");
 
+        TextView truckNameTextView = findViewById(R.id.textView8);
+        truckNameTextView.setText(truckName);
+
         Cursor cursor = dbHelper.getTruckDetailsById(truckId);
-
         if (cursor != null && cursor.moveToFirst()) {
-
             String category = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.COLUMN_FOODTRUCK_CATEGORY));
             String description = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.COLUMN_FOODTRUCK_DESCRIPTION));
             float price = cursor.getFloat(cursor.getColumnIndexOrThrow(DBHelper.COLUMN_FOODTRUCK_PRICE));
