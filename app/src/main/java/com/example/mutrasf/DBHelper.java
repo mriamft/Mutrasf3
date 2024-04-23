@@ -46,7 +46,19 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String COLUMN_DATE = "Date";
     public static final String COLUMN_TRUCK_ID = "TruckId"; // referring to the FoodTruck Id in FOODTRUCK table to know which food truck is reserved
     public static final String COLUMN_USERID = "UID"; // referring to the User Id in User table to know this reservation for who
+    public long insertReservation(long date, int hour, int minute, String truckId, String userId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_DATE, date);
+        values.put(COLUMN_TIME, String.format("%02d:%02d", hour, minute));
+        values.put(COLUMN_TRUCK_ID, truckId);
+        values.put(COLUMN_USERID, userId);
 
+        long reservationId = db.insert(TABLE_RESERVATION, null, values);
+        db.close();
+
+        return reservationId;
+    }
 
     public DBHelper(@Nullable Context context) {
         super(context, "Mutraf.db", null, 1);
@@ -221,15 +233,15 @@ public class DBHelper extends SQLiteOpenHelper {
 
     // edit reservation
     //public boolean editReservation(int reservationId, String time, String date) {
-        //SQLiteDatabase db = this.getWritableDatabase();
-       // ContentValues values = new ContentValues();
-       // values.put(COLUMN_TIME, time);
-       // values.put(COLUMN_DATE, date);
+    //SQLiteDatabase db = this.getWritableDatabase();
+    // ContentValues values = new ContentValues();
+    // values.put(COLUMN_TIME, time);
+    // values.put(COLUMN_DATE, date);
 
-      //  int rowsUpdated = db.update(TABLE_RESERVATION, values, COLUMN_RESERVEDID + "=?", new String[]{String.valueOf(reservationId)});
-      //  db.close();
-        // check if the updating was successful or not
-      //  return rowsUpdated > 0;
+    //  int rowsUpdated = db.update(TABLE_RESERVATION, values, COLUMN_RESERVEDID + "=?", new String[]{String.valueOf(reservationId)});
+    //  db.close();
+    // check if the updating was successful or not
+    //  return rowsUpdated > 0;
     //}
 
     // Add Food truck to wishlist table

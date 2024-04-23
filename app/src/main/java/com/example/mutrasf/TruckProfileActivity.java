@@ -9,28 +9,43 @@ import android.widget.TextView;
 import android.widget.Toast;
 import java.text.SimpleDateFormat;
 import androidx.appcompat.app.AppCompatActivity;
-
+import android.widget.Button;
+import android.view.View.OnClickListener;
 public class TruckProfileActivity extends AppCompatActivity {
 
     private DBHelper dbHelper;
+    private long selectedDate;
+    private int selectedHour;
+    private int selectedMinute;
+    private String truckId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_truckprofile);
-        ImageButton imageButton = (ImageButton) findViewById(R.id.imageButton);
 
-        //back Button
-        imageButton.setOnClickListener(new View.OnClickListener() {
+        ImageButton backButton = findViewById(R.id.imageView8);
+        backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(TruckProfileActivity.this, dashboard.class);
+                Intent intent = new Intent(TruckProfileActivity.this, AvailableTimeDateActivity.class);
                 startActivity(intent);
             }
         });
-        long selectedDate = getIntent().getLongExtra("SELECTED_DATE", 0);
-        int selectedHour = getIntent().getIntExtra("SELECTED_HOUR", 0);
-        int selectedMinute = getIntent().getIntExtra("SELECTED_MINUTE", 0);
+
+        ImageButton imageButton = findViewById(R.id.imageButton);
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Implement the action for the real back button
+                // For example, you can call onBackPressed() to go back to the previous activity
+                onBackPressed();
+            }
+        });
+
+        selectedDate = getIntent().getLongExtra("SELECTED_DATE", 0);
+        selectedHour = getIntent().getIntExtra("SELECTED_HOUR", 0);
+        selectedMinute = getIntent().getIntExtra("SELECTED_MINUTE", 0);
 
         TextView selectedDateTimeTextView = findViewById(R.id.selectedDateTimeTextView);
         String selectedDateTime = "Selected Date and Time: "
@@ -38,10 +53,9 @@ public class TruckProfileActivity extends AppCompatActivity {
                 + String.format("%02d:%02d", selectedHour, selectedMinute);
         selectedDateTimeTextView.setText(selectedDateTime);
 
-
         dbHelper = new DBHelper(this);
 
-        String truckId = getIntent().getStringExtra("TRUCK_ID");
+        truckId = getIntent().getStringExtra("TRUCK_ID");
         String truckName = getIntent().getStringExtra("TRUCK_NAME");
         String truckPrice = getIntent().getStringExtra("TRUCK_PRICE");
         String truckPhone = getIntent().getStringExtra("TRUCK_PHONE");
@@ -56,7 +70,7 @@ public class TruckProfileActivity extends AppCompatActivity {
             float price = cursor.getFloat(cursor.getColumnIndexOrThrow(DBHelper.COLUMN_FOODTRUCK_PRICE));
             int phoneNumber = cursor.getInt(cursor.getColumnIndexOrThrow(DBHelper.COLUMN_CONTACT_PHONE));
 
-            //truck info
+            // Truck info
             TextView categoryTextView = findViewById(R.id.cat);
             TextView descriptionTextView = findViewById(R.id.textView22);
             TextView priceTextView = findViewById(R.id.textView11);
@@ -67,11 +81,30 @@ public class TruckProfileActivity extends AppCompatActivity {
             priceTextView.setText(String.valueOf(price));
             phoneNumberTextView.setText(String.valueOf(phoneNumber));
 
-        } else {
+            // Reserve button
+            Button reserveButton = findViewById(R.id.reservebtn);
+            reserveButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // Get the user ID for the reservation (replace "userId" with the actual user ID)
+                    String userId = "userId";
 
+                    // Insert the reservation details into the Reservation table
+                    long reservationId = dbHelper.insertReservation(selectedDate, selectedHour, selectedMinute, truckId, userId);
+
+                    if (reservationId != -1) {
+                        // Reservation successful
+                        Toast.makeText(TruckProfileActivity.this, "Reservation Successful!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        // Reservation failed
+                        Toast.makeText(TruckProfileActivity.this, "Reservation Failed!", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+
+        } else {
             Toast.makeText(this, "Truck not found", Toast.LENGTH_SHORT).show();
         }
-
 
         if (cursor != null) {
             cursor.close();

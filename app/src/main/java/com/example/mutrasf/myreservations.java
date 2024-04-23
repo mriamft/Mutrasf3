@@ -1,38 +1,38 @@
 package com.example.mutrasf;
-        import static com.example.mutrasf.DBHelper.COLUMN_RESERVEDID;
-        import static com.example.mutrasf.DBHelper.COLUMN_USERID;
-        import static com.example.mutrasf.DBHelper.COLUMN_TIME;
-        import static com.example.mutrasf.DBHelper.COLUMN_DATE;
+import static com.example.mutrasf.DBHelper.COLUMN_RESERVEDID;
+import static com.example.mutrasf.DBHelper.COLUMN_USERID;
+import static com.example.mutrasf.DBHelper.COLUMN_TIME;
+import static com.example.mutrasf.DBHelper.COLUMN_DATE;
 //import static com.example.mutrasf.DBHelper.COLUMN_FOODTRUCK_PHOTO;
-        import static com.example.mutrasf.DBHelper.COLUMN_TRUCK_ID;
-        import androidx.appcompat.app.AlertDialog;
-        import androidx.appcompat.app.AppCompatActivity;
-        import androidx.recyclerview.widget.GridLayoutManager;
-        import androidx.recyclerview.widget.LinearLayoutManager;
-        import androidx.recyclerview.widget.RecyclerView;
-        import android.content.Intent;
-        import android.content.SharedPreferences;
-        import android.view.MenuItem;
-        import androidx.annotation.NonNull;
-        import androidx.appcompat.app.AppCompatActivity;
+import static com.example.mutrasf.DBHelper.COLUMN_TRUCK_ID;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.view.MenuItem;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
-        import android.annotation.SuppressLint;
-        import android.content.DialogInterface;
-        import android.content.Intent;
-        import android.database.Cursor;
-        import android.os.Bundle;
-        import android.view.View;
-        import android.widget.Button;
-        import android.widget.ImageView;
-        import android.widget.EditText;
-        import android.widget.Toast;
-        import android.text.TextWatcher;
-        import android.text.Editable;
+import android.annotation.SuppressLint;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.database.Cursor;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.EditText;
+import android.widget.Toast;
+import android.text.TextWatcher;
+import android.text.Editable;
 
 
-        import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-        import java.util.ArrayList;
+import java.util.ArrayList;
 
 public class myreservations extends AppCompatActivity {
 

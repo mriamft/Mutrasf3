@@ -87,13 +87,13 @@
         app:layout_constraintHorizontal_bias="0.472"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TextClock
-        android:id="@+id/textClock2"
+    <EditText
+        android:id="@+id/timeEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:format12Hour="hh:mm:am"
-        android:text="12:30 AM"
+        android:hint="Enter Time"
+        android:inputType="time"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"

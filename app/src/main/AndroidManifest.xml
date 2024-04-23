@@ -30,6 +30,7 @@
         <activity
             android:name=".login1"
             android:exported="false" />
+        <activity android:name=".AvailableTimeDateActivity" />
 
         <activity
             android:name=".signup"
