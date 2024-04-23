@@ -1,5 +1,6 @@
 package com.example.mutrasf;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -7,6 +8,7 @@ import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.TextClock;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.text.SimpleDateFormat;
@@ -33,16 +35,31 @@ public class AvailableTimeDateActivity extends AppCompatActivity {
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 String selectedDate = getSelectedDate();
                 String selectedTime = getSelectedTime();
 
+                // Create the confirmation message
+                String confirmationMessage = "You have chosen the following date and time:\n"
+                        + "Date: " + selectedDate + "\n"
+                        + "Time: " + selectedTime;
 
-                Intent intent = new Intent();
-                intent.putExtra("selectedDate", selectedDate);
-                intent.putExtra("selectedTime", selectedTime);
-                setResult(RESULT_OK, intent);
-                finish();
+                // Display the confirmation message using a dialog
+                AlertDialog.Builder builder = new AlertDialog.Builder(AvailableTimeDateActivity.this);
+                builder.setTitle("Confirmation")
+                        .setMessage(confirmationMessage)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // Save the date and time (you can implement this logic)
+                                // Redirect to TruckProfileActivity with the saved date and time
+                                Intent intent = new Intent(AvailableTimeDateActivity.this, TruckProfileActivity.class);
+                                intent.putExtra("SELECTED_DATE", selectedDate);
+                                intent.putExtra("SELECTED_TIME", selectedTime);
+                                startActivity(intent);
+                            }
+                        })
+                        .setNegativeButton("No", null)
+                        .show();
             }
         });
 
@@ -57,9 +74,7 @@ public class AvailableTimeDateActivity extends AppCompatActivity {
         });
     }
 
-
     private String getSelectedDate() {
-
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
         Date selectedDate = new Date(selectedDateMillis);
         return dateFormat.format(selectedDate);

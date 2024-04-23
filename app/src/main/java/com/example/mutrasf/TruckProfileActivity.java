@@ -4,7 +4,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import java.text.SimpleDateFormat;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class TruckProfileActivity extends AppCompatActivity {
@@ -15,6 +15,16 @@ public class TruckProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_truckprofile);
+
+        long selectedDate = getIntent().getLongExtra("SELECTED_DATE", 0);
+        int selectedHour = getIntent().getIntExtra("SELECTED_HOUR", 0);
+        int selectedMinute = getIntent().getIntExtra("SELECTED_MINUTE", 0);
+
+        TextView selectedDateTimeTextView = findViewById(R.id.selectedDateTimeTextView);
+        String selectedDateTime = "Selected Date and Time: "
+                + new SimpleDateFormat("dd/MM/yyyy").format(selectedDate) + " "
+                + String.format("%02d:%02d", selectedHour, selectedMinute);
+        selectedDateTimeTextView.setText(selectedDateTime);
 
 
         dbHelper = new DBHelper(this);

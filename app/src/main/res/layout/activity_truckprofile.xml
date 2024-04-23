@@ -36,6 +36,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/availableDateTimeButton" />
 
+
         <ImageButton
             android:id="@+id/imageView8"
             android:layout_width="247dp"
@@ -45,12 +46,22 @@
             android:contentDescription="date"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/availableDateTimeButton"
-            app:layout_constraintHorizontal_bias="0.87"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/availableDateTimeButton"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.514"
+            app:layout_constraintVertical_bias="0.378"
             app:srcCompat="@drawable/dateandtime" />
 
+        <TextView
+            android:id="@+id/selectedDateTimeTextView"
+            android:layout_width="169dp"
+            android:layout_height="57dp"
+            android:layout_marginBottom="12dp"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/reservebtn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/textView10"
