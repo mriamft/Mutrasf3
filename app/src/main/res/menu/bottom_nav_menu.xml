@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/homemenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:icon="@drawable/baseline_home_24"
+        android:title=" "
+        android:visible="true" />
+    <item
+        android:id="@+id/wishlist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:icon="@drawable/wishlistpage"
+        android:title="Wishlist"
+        android:visible="true" />
+    <item
+        android:id="@+id/my_reservations"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:icon="@drawable/baseline_airport_shuttle_24"
+        android:title="My Reservations"
+        android:visible="true" />
+    <item
+        android:id="@+id/logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:icon="@drawable/logout"
+        android:title="Log-out"
+        android:visible="true" />
+</menu>

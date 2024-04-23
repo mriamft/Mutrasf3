@@ -1,0 +1,28 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.Mutrasf" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    </style>
+
+    <style name="Theme.Mutrasf" parent="Base.Theme.Mutrasf" />
+
+
+    <style name="BottomNavigationStyle" parent="Widget.MaterialComponents.BottomNavigationView">
+        <!-- Customize the title text color -->
+        <item name="android:textColorPrimary">@color/white</item>
+        <!-- Customize the navigation item icon tint -->
+        <item name="itemIconTint">@color/white</item>
+        <!-- Customize the navigation item text color -->
+        <item name="itemTextColor">@color/white</item>
+        <item name="android:textAppearance">@style/BottomNavigationTitleTextAppearance</item>
+        <!-- Customize the background color -->
+    </style>
+
+    <style name="BottomNavigationTitleTextAppearance" parent="TextAppearance.MaterialComponents.Caption">
+        <!-- Customize the title text color -->
+        <item name="android:textColor">@color/white</item>
+        <!-- Customize other text attributes if desired -->
+    </style>
+
+    </resources>
