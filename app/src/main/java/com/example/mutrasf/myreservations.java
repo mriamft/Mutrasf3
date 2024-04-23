@@ -63,16 +63,41 @@ public class myreservations extends AppCompatActivity {
                 } else if (item.getItemId() == R.id.my_reservations) {
                     startActivity(new Intent(myreservations.this, myreservations.class));
                     return true;
-                } else if (item.getItemId() == R.id.logout) {
-                    SharedPreferences preferences = getSharedPreferences("user_prefs", MODE_PRIVATE);
-                    SharedPreferences.Editor editor = preferences.edit();
-                    editor.clear();
-                    editor.apply();
-
-                    startActivity(new Intent(myreservations.this, MainActivity.class));
-                    finish();
                 }
+                else if (item.getItemId() == R.id.logout) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(myreservations.this);
+                    builder.setTitle("Logout Confirmation");
+                    builder.setMessage("Are you sure you want to logout?");
+
+                    //logout
+                    builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            SharedPreferences preferences = getSharedPreferences("user_prefs", MODE_PRIVATE);
+                            SharedPreferences.Editor editor = preferences.edit();
+                            editor.clear();
+                            editor.apply();
+
+                            startActivity(new Intent(myreservations.this, MainActivity.class));
+                            finish();
+                        }
+                    });
+
+                    //no logout
+                    builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+
+
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                }
+
                 return false;
+
 
             }
         });

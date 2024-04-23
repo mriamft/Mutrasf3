@@ -5,10 +5,13 @@ import static com.example.mutrasf.DBHelper.COLUMN_FOODTRUCK_NAME;
 import static com.example.mutrasf.DBHelper.COLUMN_FOODTRUCK_PRICE;
 import static com.example.mutrasf.DBHelper.COLUMN_ID;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -57,17 +60,39 @@ public class dashboard extends AppCompatActivity {
                 } else if (item.getItemId() == R.id.my_reservations) {
                     startActivity(new Intent(dashboard.this, myreservations.class));
                     return true;
-                } else if (item.getItemId() == R.id.logout) {
-                    SharedPreferences preferences = getSharedPreferences("user_prefs", MODE_PRIVATE);
-                    SharedPreferences.Editor editor = preferences.edit();
-                    editor.clear();
-                    editor.apply();
-
-                    startActivity(new Intent(dashboard.this, MainActivity.class));
-                    finish();
-                    return true;
-
                 }
+                else if (item.getItemId() == R.id.logout) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(dashboard.this);
+                    builder.setTitle("Logout Confirmation");
+                    builder.setMessage("Are you sure you want to logout?");
+
+                    //logout
+                    builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            SharedPreferences preferences = getSharedPreferences("user_prefs", MODE_PRIVATE);
+                            SharedPreferences.Editor editor = preferences.edit();
+                            editor.clear();
+                            editor.apply();
+
+                            startActivity(new Intent(dashboard.this, MainActivity.class));
+                            finish();
+                        }
+                    });
+
+                    //no logout
+                    builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+
+
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                }
+
                 return false;
 
             }

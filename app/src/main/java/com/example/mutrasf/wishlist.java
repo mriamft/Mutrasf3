@@ -1,6 +1,9 @@
 package com.example.mutrasf;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.view.MenuItem;
@@ -31,17 +34,40 @@ public class wishlist extends AppCompatActivity {
                     return true;
                 } else if (item.getItemId() == R.id.my_reservations) {
                     startActivity(new Intent(wishlist.this, myreservations.class));
-                    return true;
-                } else if (item.getItemId() == R.id.logout) {
-                    SharedPreferences preferences = getSharedPreferences("user_prefs", MODE_PRIVATE);
-                    SharedPreferences.Editor editor = preferences.edit();
-                    editor.clear();
-                    editor.apply();
+                    return true;}
+                else if (item.getItemId() == R.id.logout) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(wishlist.this);
+                        builder.setTitle("Logout Confirmation");
+                        builder.setMessage("Are you sure you want to logout?");
 
-                    startActivity(new Intent(wishlist.this, MainActivity.class));
-                    finish();
-                }
-                return false;
+                        //logout
+                        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                SharedPreferences preferences = getSharedPreferences("user_prefs", MODE_PRIVATE);
+                                SharedPreferences.Editor editor = preferences.edit();
+                                editor.clear();
+                                editor.apply();
+
+                                startActivity(new Intent(wishlist.this, MainActivity.class));
+                                finish();
+                            }
+                        });
+
+                        //no logout
+                        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+
+
+                        AlertDialog dialog = builder.create();
+                        dialog.show();
+                    }
+
+                    return false;
 
             }
         });
