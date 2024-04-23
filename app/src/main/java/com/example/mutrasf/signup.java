@@ -5,9 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 public class signup extends AppCompatActivity {
@@ -20,10 +22,22 @@ public class signup extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
+        ImageButton imageButton = (ImageButton) findViewById(R.id.imageButton);
+
+        //back Button
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(signup.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
         phone = (EditText) findViewById(R.id.phone);
         username = (EditText) findViewById(R.id.username);
         password = (EditText) findViewById(R.id.password);
+        //for security, we make password invisible
+        password.setTransformationMethod(new PasswordTransformationMethod());
         signup = (Button) findViewById(R.id.btnsignup);
         DB = new DBHelper(signup.this);
 

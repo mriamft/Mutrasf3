@@ -1,7 +1,10 @@
 package com.example.mutrasf;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.text.SimpleDateFormat;
@@ -15,7 +18,16 @@ public class TruckProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_truckprofile);
+        ImageButton imageButton = (ImageButton) findViewById(R.id.imageButton);
 
+        //back Button
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(TruckProfileActivity.this, dashboard.class);
+                startActivity(intent);
+            }
+        });
         long selectedDate = getIntent().getLongExtra("SELECTED_DATE", 0);
         int selectedHour = getIntent().getIntExtra("SELECTED_HOUR", 0);
         int selectedMinute = getIntent().getIntExtra("SELECTED_MINUTE", 0);

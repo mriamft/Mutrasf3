@@ -4,30 +4,43 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 
 public class login1 extends AppCompatActivity {
-    EditText username, password;
+    EditText phone, password;
     Button register;
     DBHelper DB;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login1);
+        ImageButton imageButton = (ImageButton) findViewById(R.id.imageButton);
 
-        username = (EditText) findViewById(R.id.username1);
+        //back Button
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(login1.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+        phone = (EditText) findViewById(R.id.phoneNum);
         password = (EditText) findViewById(R.id.password);
+        //for security, we make password invisible
+        password.setTransformationMethod(new PasswordTransformationMethod());
         register = (Button) findViewById(R.id.confirmtimebtn);
         DB = new DBHelper(this);
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String user = username.getText().toString();
+                String user = phone.getText().toString();
                 String pass = password.getText().toString();
                 if(user.equals("")||pass.equals(""))
                     Toast.makeText(login1.this, "Please enter all the fields", Toast.LENGTH_SHORT).show();
